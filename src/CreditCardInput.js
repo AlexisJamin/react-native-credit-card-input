@@ -163,6 +163,7 @@ export default class CreditCardInput extends Component {
           expiry={expiry}
           cvc={cvc} />
         <KeyboardAwareScrollView 
+          ref="Form"
           enableOnAndroid={true} 
           style={{alignItems:'center', backgroundColor:'transparent'}}>
           <CCInput {...this._inputProps("number")}
