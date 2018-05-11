@@ -11,6 +11,8 @@ import ReactNative, {
   ViewPropTypes,
 } from "react-native";
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import CreditCard from "./CardView";
 import CCInput from "./CCInput";
 import { InjectedProps } from "./connectToState";
@@ -160,11 +162,9 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc} />
-        <ScrollView ref="Form"
-          keyboardShouldPersistTaps="always"
-          scrollEnabled={allowScroll}
-          showsHorizontalScrollIndicator={false}
-          style={s.form}>
+        <KeyboardAwareScrollView 
+          enableOnAndroid={true} 
+          style={{alignItems:'center', backgroundColor:'transparent'}}>
           <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
@@ -182,7 +182,7 @@ export default class CreditCardInput extends Component {
             <CCInput {...this._inputProps("postalCode")}
               keyboardType="numeric"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
