@@ -9,6 +9,7 @@ import ReactNative, {
   Dimensions,
   TextInput,
   ViewPropTypes,
+  Platform,
 } from "react-native";
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -163,11 +164,20 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc} />
+      { Platform.OS === 'ios' &&
         <KeyboardAwareScrollView 
           ref="Form"
           enableOnAndroid={true} 
-          extraScrollHeight={50}
           style={s.form}>
+      }
+      
+      { Platform.OS === 'android' &&
+        <KeyboardAwareScrollView 
+          ref="Form"
+          enableOnAndroid={true} 
+          extraScrollHeight={100}
+          style={s.form}>
+      }
           <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
