@@ -158,7 +158,7 @@ export default class CreditCardInput extends Component {
           ref="Form"
           style={s.form}
           enableOnAndroid={true} 
-          extraScrollHeight={Platform.OS === 'android' ? 200 : 0}>
+          extraScrollHeight={Platform.OS === 'android' ? 150 : 0}>
         <CreditCard 
           focused={focused}
           brand={type}
@@ -170,11 +170,10 @@ export default class CreditCardInput extends Component {
           name={requiresName ? name : " "}
           number={number}
           expiry={expiry}
-          cvc={cvc}
-          style={{marginBottom:5}}  />
+          cvc={cvc}/>
         <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
+            containerStyle={[s.inputContainer, inputContainerStyle, { marginTop:5, width: CARD_NUMBER_INPUT_WIDTH }]} />
           <CCInput {...this._inputProps("expiry")}
             keyboardType="numeric"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
