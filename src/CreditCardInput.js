@@ -10,7 +10,6 @@ import ReactNative, {
   TextInput,
   ViewPropTypes,
   Platform,
-  KeyboardAvoidingView,
 } from "react-native";
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -154,12 +153,31 @@ export default class CreditCardInput extends Component {
 
     return (
       <View style={s.container}>
-        <KeyboardAwareScrollView 
+      { Platform.OS === 'android' 
+      ? <KeyboardAwareScrollView 
           ref="Form"
           style={s.form}
           enableOnAndroid={true} 
-          extraScrollHeight={Platform.OS === 'android' ? 150 : 0}>
-        <CreditCard 
+          extraScrollHeight={100}>
+          <CCInput {...this._inputProps("number")}
+            keyboardType="numeric"
+            containerStyle={[s.inputContainer, inputContainerStyle, { marginTop:5, width: CARD_NUMBER_INPUT_WIDTH }]} />
+          <CCInput {...this._inputProps("expiry")}
+            keyboardType="numeric"
+            containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
+          { requiresCVC &&
+            <CCInput {...this._inputProps("cvc")}
+              keyboardType="numeric"
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
+          { requiresName &&
+            <CCInput {...this._inputProps("name")}
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} /> }
+          { requiresPostalCode &&
+            <CCInput {...this._inputProps("postalCode")}
+              keyboardType="numeric"
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
+         </KeyboardAwareScrollView>
+      : <CreditCard 
           focused={focused}
           brand={type}
           scale={cardScale}
@@ -171,6 +189,9 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc}/>
+        <KeyboardAwareScrollView 
+          ref="Form"
+          style={s.form}>
         <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
             containerStyle={[s.inputContainer, inputContainerStyle, { marginTop:5, width: CARD_NUMBER_INPUT_WIDTH }]} />
@@ -189,6 +210,7 @@ export default class CreditCardInput extends Component {
               keyboardType="numeric"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
           </KeyboardAwareScrollView>
+          }
       </View>
     );
   }
