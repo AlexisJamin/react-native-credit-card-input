@@ -152,9 +152,10 @@ export default class CreditCardInput extends Component {
     } = this.props;
 
     return (
-      <View style={s.container}>
+      
       { Platform.OS === 'android' 
-      ? <KeyboardAwareScrollView 
+      ? <View style={s.container}>
+       <KeyboardAwareScrollView 
           ref="Form"
           style={s.form}
           enableOnAndroid={true} 
@@ -177,7 +178,9 @@ export default class CreditCardInput extends Component {
               keyboardType="numeric"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
          </KeyboardAwareScrollView>
-      : <CreditCard 
+         </View>
+      : <View style={s.container}>
+        <CreditCard 
           focused={focused}
           brand={type}
           scale={cardScale}
@@ -210,8 +213,8 @@ export default class CreditCardInput extends Component {
               keyboardType="numeric"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
           </KeyboardAwareScrollView>
+         </View>
           }
-      </View>
     );
   }
 }
