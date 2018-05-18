@@ -166,7 +166,7 @@ export default class CreditCardInput extends Component {
         <KeyboardAwareScrollView 
           ref="Form"
           enableOnAndroid={true} 
-          extraScrollHeight={100}
+          extraScrollHeight={50}
           style={s.form}>
           <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
