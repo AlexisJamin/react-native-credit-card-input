@@ -164,20 +164,11 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc} />
-      { Platform.OS === 'ios' &&
         <KeyboardAwareScrollView 
           ref="Form"
           enableOnAndroid={true} 
+          extraScrollHeight={Platform.OS === 'android' ? 100 : 0}
           style={s.form}>
-      }
-      
-      { Platform.OS === 'android' &&
-        <KeyboardAwareScrollView 
-          ref="Form"
-          enableOnAndroid={true} 
-          extraScrollHeight={100}
-          style={s.form}>
-      }
           <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
