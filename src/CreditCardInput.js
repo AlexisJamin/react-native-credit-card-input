@@ -192,6 +192,7 @@ export default class CreditCardInput extends Component {
           cvc={cvc}/>
         <KeyboardAwareScrollView 
           ref="Form"
+          enableAutomaticScroll
           style={s.form}>
         <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
